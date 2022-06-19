@@ -1,0 +1,1 @@
+width=23, font='Arial 15', foreground="#3778C2",background="#F3F3F3"
