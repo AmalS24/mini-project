@@ -1,12 +1,12 @@
 from dataclasses import field
 from tkinter import *
+from tkinter.filedialog import asksaveasfilename
 from pandastable import Table
 from pymongo import MongoClient
 from pandas import DataFrame
 from tkinter.font import Font 
 from tkinter import messagebox
 import tkinter.ttk as ttk
-import openpyxl
 import ctypes 
 
 root = Tk()
@@ -46,7 +46,13 @@ def handle_reset():
     list_cursor = list(cursor)
     render_table(list_cursor)
 
+def handle_print():
+    file = asksaveasfilename(filetypes=[('excel', "*.xlsx")])
+    if(file):
+        df.to_excel(file+".xlsx",index = False, header=True)
+
 def render_table(cur):
+    global df
     df = DataFrame(cur)
     df.pop('_id')
     table = Table(f,
@@ -93,6 +99,12 @@ rst_btn = ttk.Button(
     style= 'W.TButton',
     text="Reset",
     command=handle_reset).place(x=530,y=640)
+
+print_btn = ttk.Button(
+    root,
+    style= 'W.TButton',
+    text="Print",
+    command=handle_print).place(x=630,y=640)
 
 # df.to_excel (r'C:\Users\Amal\Desktop\export_dataframe.xlsx', index = False, header=True)
 root.mainloop()
