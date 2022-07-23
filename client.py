@@ -73,7 +73,10 @@ def handle_finalsubmit():
     client = MongoClient("mongodb://127.0.0.1:27017/")
     mydb = client['LMS'] #create db LMS
     table = mydb.info #create collection info
-    table.insert_one(record)
+    id = table.insert_one(record)
+    f = open("C:\\Users\\Amal\\Desktop\id.txt","w")
+    f.write(str(id.inserted_id))
+    f.close()
     root.quit()
 
 def disable_event():
