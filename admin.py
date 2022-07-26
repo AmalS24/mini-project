@@ -53,11 +53,11 @@ def handle_print():
         df.to_excel(file+".xlsx",index = False, header=True)
 
 def handle_shutdown_call():
-    os.system("shutdown -i")
+    os.system("./client -r shutdown -t 60 -i eth0")
 
 def handle_notify():
     msg = notify_box.get()
-    os.system("echo "+msg)
+    os.system("./client -r notify -m "+msg+" -b -i eth0")
 
 
 def render_table(cur):
